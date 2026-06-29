@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 
 interface Project {
@@ -18,6 +19,78 @@ interface SkillGroup {
 }
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [snackbar, setSnackbar] = useState<{
+    show: boolean;
+    message: string;
+    type: "success" | "error";
+  }>({
+    show: false,
+    message: "",
+    type: "success",
+  });
+
+  useEffect(() => {
+    if (snackbar.show) {
+      const timer = setTimeout(() => {
+        setSnackbar((prev) => ({ ...prev, show: false }));
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [snackbar.show]);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSnackbar({
+          show: true,
+          message: data.message || "Message sent successfully!",
+          type: "success",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSnackbar({
+          show: true,
+          message: data.error || "Failed to send message.",
+          type: "error",
+        });
+      }
+    } catch (error) {
+      setSnackbar({
+        show: true,
+        message: "An unexpected error occurred. Please try again.",
+        type: "error",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const projects: Project[] = [
     {
       title: "Aether AI Studio",
@@ -202,7 +275,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4>Email</h4>
-                  <p><a href="mailto:souvik@example.com" id="contact-email-link">souvik@example.com</a></p>
+                  <p><a href="mailto:souvik00chakraborty@gmail.com" id="contact-email-link">souvik00chakraborty@gmail.com</a></p>
                 </div>
               </div>
               <div className={styles.contactMethod}>
@@ -219,25 +292,53 @@ export default function Home() {
               </div>
             </div>
 
-            <form className={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
+            <form className={styles.contactForm} onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" className={styles.formInput} placeholder="Your Name" required />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className={styles.formInput}
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" className={styles.formInput} placeholder="your.email@example.com" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className={styles.formInput}
+                  placeholder="your.email@example.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" className={`${styles.formInput} ${styles.formTextarea}`} placeholder="How can I help you?" required></textarea>
+                <textarea
+                  id="message"
+                  name="message"
+                  className={`${styles.formInput} ${styles.formTextarea}`}
+                  placeholder="How can I help you?"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                ></textarea>
               </div>
-              <button type="submit" className="btn-primary" id="contact-submit-btn">
-                Send Message
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
+              <button type="submit" className="btn-primary" id="contact-submit-btn" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send Message"}
+                {!isSubmitting && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                )}
               </button>
             </form>
           </div>
@@ -253,6 +354,23 @@ export default function Home() {
           <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} id="footer-twitter-link">Twitter</a>
         </div>
       </footer>
+
+      {/* Snackbar Notification */}
+      <div className={`${styles.snackbar} ${snackbar.show ? styles.snackbarActive : ""} ${snackbar.type === "success" ? styles.snackbarSuccess : styles.snackbarError}`} id="contact-snackbar">
+        <div className={styles.snackbarIcon}>
+          {snackbar.type === "success" ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          )}
+        </div>
+        <span>{snackbar.message}</span>
+      </div>
     </div>
   );
 }
