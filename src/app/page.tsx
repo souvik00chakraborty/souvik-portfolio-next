@@ -121,35 +121,34 @@ export default function Home() {
 
   const skillGroups: SkillGroup[] = [
     {
-      category: "Frontend engineering",
+      category: "Core UI/UX & Styling",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <line x1="9" y1="21" x2="9" y2="9"></line>
+        </svg>
+      ),
+      skills: ["HTML5 & CSS3 / Sass", "Tailwind CSS", "CSS Modules", "Responsive Layouts", "A11y (Accessibility)"]
+    },
+    {
+      category: "Frameworks & State",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="16 18 22 12 16 6"></polyline>
           <polyline points="8 6 2 12 8 18"></polyline>
         </svg>
       ),
-      skills: ["React / Next.js", "TypeScript", "HTML5 & Vanilla CSS", "CSS Modules", "Responsive Web Design"]
+      skills: ["React / Next.js", "TypeScript", "Redux Toolkit / Zustand", "Framer Motion", "TanStack Query / Clients"]
     },
     {
-      category: "Backend & Systems",
+      category: "Tooling & Performance",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-          <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-          <line x1="6" y1="6" x2="6.01" y2="6"></line>
-          <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
         </svg>
       ),
-      skills: ["Node.js / Express", "Rust", "REST & GraphQL APIs", "PostgreSQL / Prisma", "Redis Cache"]
-    },
-    {
-      category: "Infrastructure & Tools",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a6 6 0 0 0 6-6 6 6 0 0 0-6-6z"></path>
-        </svg>
-      ),
-      skills: ["Docker / Containers", "Vercel / AWS", "Git / GitHub Actions", "ESLint & Biome", "Linux Systems"]
+      skills: ["Vite / Webpack / Turbopack", "Jest / Testing Library", "Cypress / Playwright", "Git & GitHub Actions", "Core Web Vitals Optimization"]
     }
   ];
 
@@ -176,10 +175,10 @@ export default function Home() {
           <div className={styles.heroGlow}></div>
           <div className={styles.tagline}>Available for Opportunities</div>
           <h1>
-            Crafting the next generation of <span className={styles.gradientText}>interactive web</span> systems.
+            Crafting the next generation of <span className={styles.gradientText}>interactive user</span> experiences.
           </h1>
           <p>
-            Hi, I&apos;m Souvik Chakraborty. I design and engineer premium full-stack web applications, focus heavily on performance, sleek design, and solid systems architecture.
+            Hi, I&apos;m Souvik Chakraborty. I design and engineer premium frontend web applications, focusing heavily on performance, pixel-perfect design, and smooth user interactions.
           </p>
           <div className={styles.heroCtas}>
             <a href="#projects" className="btn-primary" id="hero-view-work-btn">
@@ -199,7 +198,7 @@ export default function Home() {
         <section id="projects" className={styles.section}>
           <div className={styles.sectionHeader}>
             <h2>Featured Work</h2>
-            <p>A selection of projects that demonstrate design sensibility and system expertise.</p>
+            <p>A selection of projects that demonstrate design sensibility and frontend engineering expertise.</p>
           </div>
           <div className={styles.projectsGrid}>
             {projects.map((project, idx) => (

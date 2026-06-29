@@ -16,7 +16,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Souvik Chakraborty | Portfolio",
-  description: "Creative Full Stack Developer Portfolio",
+  description: "Creative Frontend Developer & UI Engineer Portfolio",
 };
 
 export default function RootLayout({
