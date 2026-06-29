@@ -94,28 +94,28 @@ export default function Home() {
 
   const projects: Project[] = [
     {
-      title: "Aether AI Studio",
-      description: "A collaborative AI image generation dashboard featuring live canvas tools, prompt helpers, and instant generation models using serverless Edge workers.",
-      tags: ["Next.js", "TypeScript", "React Compiler", "WebSockets"],
+      title: "Aura UI Design System",
+      description: "An enterprise-grade, accessible (WCAG compliant) React UI component library featuring drag-and-drop builder interfaces, fluid theme customization tools, and sub-millisecond CSS compilation.",
+      tags: ["React / TS", "Next.js", "A11y", "Tailwind CSS", "Framer Motion"],
       githubUrl: "https://github.com",
       liveUrl: "https://vercel.app",
-      icon: "🎨"
+      icon: "📐"
     },
     {
-      title: "Chronos DB",
-      description: "An ultra-lightweight, high-performance in-memory key-value database built in Rust, featuring a robust TypeScript client library and full replication support.",
-      tags: ["Rust", "TypeScript", "gRPC", "Systems Programming"],
+      title: "FluidMotion Editor",
+      description: "A high-fidelity web animation timeline editor that allows developers to interactively design complex Framer Motion and WebGL micro-interactions and export responsive web code.",
+      tags: ["React", "TypeScript", "Canvas API", "WebGL", "Framer Motion"],
       githubUrl: "https://github.com",
       liveUrl: "https://vercel.app",
-      icon: "⚡"
+      icon: "🎬"
     },
     {
-      title: "Zenith Telemetry",
-      description: "Real-time user analytics and core web vitals monitor with zero performance footprint, powered by Next.js middleware and edge database queries.",
-      tags: ["Next.js", "Edge DB", "Charts", "Telemetry"],
+      title: "GraphIQ - Analytics Hub",
+      description: "An interactive, real-time analytics visualizer featuring dynamic SVG graphs, drag-and-drop dashboard widget customizers, and live WebSocket streaming logs.",
+      tags: ["React / TS", "Next.js", "D3.js", "WebSockets", "CSS Modules"],
       githubUrl: "https://github.com",
       liveUrl: "https://vercel.app",
-      icon: "📊"
+      icon: "🔮"
     }
   ];
 
