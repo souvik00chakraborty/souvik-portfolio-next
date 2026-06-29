@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { saveSubmission } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,6 +22,9 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Save submission to database
+    await saveSubmission(name, email, message);
 
     const host = process.env.SMTP_HOST;
     const port = process.env.SMTP_PORT;
