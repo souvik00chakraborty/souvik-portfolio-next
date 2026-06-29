@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import styles from "./page.module.css";
 
 interface Project {
@@ -163,6 +164,7 @@ export default function Home() {
             <li><a href="#projects" className={styles.navLink} id="nav-projects-link">Projects</a></li>
             <li><a href="#skills" className={styles.navLink} id="nav-skills-link">Skills</a></li>
             <li><a href="#contact" className={styles.navLink} id="nav-contact-link">Contact</a></li>
+            <li><Link href="/admin/login" className={styles.navLink} id="nav-login-link">Login</Link></li>
           </ul>
         </nav>
       </header>
