@@ -4,6 +4,74 @@ import Link from "next/link";
 import React from "react";
 
 export default function CVPage() {
+  const [place, setPlace] = React.useState("Chakdaha");
+  const [dateString, setDateString] = React.useState("10/07/2026");
+
+  React.useEffect(() => {
+    // Set dynamic current date (format: DD/MM/YYYY)
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    setDateString(`${dd}/${mm}/${yyyy}`);
+
+    // Helper to fallback to IP Geolocation
+    const fallbackToIp = () => {
+      fetch("https://ipapi.co/json/")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.city) {
+            setPlace(data.city);
+          }
+        })
+        .catch(() => {
+          // Fallback to secondary location API if ipapi is down or rate-limited
+          return fetch("https://freeipapi.com/api/json")
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.cityName) {
+                setPlace(data.cityName);
+              }
+            });
+        })
+        .catch((err) => {
+          console.error("IP Geolocation fallback failed:", err);
+        });
+    };
+
+    // 1. Try GPS Geolocation first (most precise)
+    if (typeof window !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          // Reverse geocode using OpenStreetMap Nominatim API
+          fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
+            .then((res) => res.json())
+            .then((data) => {
+              const addr = data.address;
+              const cityOrTown = addr.city || addr.town || addr.village || addr.suburb || addr.municipality || addr.county;
+              if (cityOrTown) {
+                setPlace(cityOrTown);
+              } else {
+                fallbackToIp();
+              }
+            })
+            .catch((err) => {
+              console.error("Reverse geocoding failed:", err);
+              fallbackToIp();
+            });
+        },
+        (error) => {
+          console.warn("GPS Geolocation failed. Using IP fallback.", error);
+          fallbackToIp();
+        },
+        { enableHighAccuracy: true, timeout: 5000 }
+      );
+    } else {
+      fallbackToIp();
+    }
+  }, []);
+
   const handlePrint = () => {
     window.print();
   };
@@ -258,8 +326,8 @@ export default function CVPage() {
         {/* Signature Footer */}
         <section className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mt-6 text-[13px] text-slate-300 print:text-gray-900 leading-normal">
           <div className="flex flex-col gap-3">
-            <div><strong>Place:</strong> Chakdaha</div>
-            <div><strong>Date:</strong> 10/07/2026</div>
+            <div><strong>Place:</strong> {place}</div>
+            <div><strong>Date:</strong> {dateString}</div>
           </div>
           <div className="flex flex-col items-center gap-1 shrink-0 w-full sm:w-auto">
             {/* Cursive Signature Graphic */}
