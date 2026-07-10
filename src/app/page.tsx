@@ -163,6 +163,7 @@ export default function Home() {
             <li><a href="#projects" className={styles.navLink} id="nav-projects-link">Projects</a></li>
             <li><a href="#skills" className={styles.navLink} id="nav-skills-link">Skills</a></li>
             <li><a href="#contact" className={styles.navLink} id="nav-contact-link">Contact</a></li>
+            <li><Link href="/cv" className={styles.navLink} id="nav-cv-link">CV</Link></li>
             <li><Link href="/admin/login" className={styles.navLink} id="nav-login-link">Login</Link></li>
           </ul>
         </nav>
