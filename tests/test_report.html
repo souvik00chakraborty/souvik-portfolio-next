@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Test Report - Souvik Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --success-border: #a7f3d0;
+            --danger: #ef4444;
+            --danger-light: #fef2f2;
+            --danger-border: #fca5a5;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .meta-card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .status-passed {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-top: 30px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #334155;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 12px 16px;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: #334155;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success {
+            background-color: var(--success-light);
+            color: var(--success);
+            border: 1px solid var(--success-border);
+        }
+
+        .badge-danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+            border: 1px solid var(--danger-border);
+        }
+
+        .print-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .print-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="title">Software Test Report</div>
+        <div class="subtitle">Souvik Portfolio Next.js Website</div>
+    </header>
+
+    <div class="meta-grid">
+        <div class="meta-card">
+            <div class="meta-label">Date of Execution</div>
+            <div class="meta-value">July 10, 2026</div>
+        </div>
+        <div class="meta-card">
+            <div class="meta-label">Overall Status</div>
+            <div class="meta-value status-passed">PASSED (100%)</div>
+        </div>
+        <div class="meta-card">
+            <div class="meta-label">Runtime Env</div>
+            <div class="meta-value">Node.js v24.18.0</div>
+        </div>
+        <div class="meta-card">
+            <div class="meta-label">Test Port</div>
+            <div class="meta-value">3001</div>
+        </div>
+    </div>
+
+    <h2>1. Executive Summary</h2>
+    <p>This report summarizes the outcome of the software test execution conducted on the Next.js portfolio website. The objective was to verify the robustness of backend contact submission workflows, database integrity, and administrative authentication controls.</p>
+    <p>A total of 10 automated test cases were executed, covering end-to-end integration and API boundaries. All 10 test cases passed successfully with no errors or defects identified.</p>
+
+    <h2>2. Test Environment</h2>
+    <p>The testing session was carried out under the following configuration:</p>
+    <ul>
+        <li><strong>Operating System:</strong> Windows Local Host</li>
+        <li><strong>Web Server Framework:</strong> Next.js v16.2.9</li>
+        <li><strong>Database:</strong> Local JSON file database (data/submissions.json)</li>
+    </ul>
+
+    <h2>3. Automated Test Execution Results</h2>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Test Case ID</th>
+                    <th>Test Case Description</th>
+                    <th>Result</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>TC-CONTACT-01</strong></td>
+                    <td>Successful Form Submission</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Verified valid submissions write to database correctly.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-CONTACT-02</strong></td>
+                    <td>Form Submission - Missing Fields</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Rejected with 400 Bad Request if name/email/message missing.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-CONTACT-03</strong></td>
+                    <td>Form Submission - Invalid Email</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Rejected with 400 Bad Request on invalid email patterns.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-SUB-01</strong></td>
+                    <td>Unauthorized Submissions Fetch</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Blocked fetch without active admin session cookie (401).</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-AUTH-01</strong></td>
+                    <td>Successful Admin Login</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Valid credentials successfully authenticate and set session cookie.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-AUTH-02</strong></td>
+                    <td>Admin Login - Invalid Credentials</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Failed logins rejected with 401 Unauthorized.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-SUB-02</strong></td>
+                    <td>Fetch Submissions (Authenticated)</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Authenticated admin successfully fetched submissions list.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-SUB-03</strong></td>
+                    <td>Mark Submission Read/Unread</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Toggled read status successfully updated database record.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-SUB-04</strong></td>
+                    <td>Delete Submission</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Deleted submission successfully removed from database record.</td>
+                </tr>
+                <tr>
+                    <td><strong>TC-AUTH-03</strong></td>
+                    <td>Successful Admin Logout</td>
+                    <td><span class="badge badge-success">PASS</span></td>
+                    <td>Logout API cleared cookie and terminated the admin session.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>4. Test Coverage Analysis</h2>
+    <p>The automated integration test suite verified 100% of the critical backend database modules and API routing services:</p>
+    <ul>
+        <li><strong>Database Libraries:</strong> <code>src/lib/db.ts</code> (save, read, update status, and delete logic)</li>
+        <li><strong>Auth Libraries:</strong> <code>src/lib/auth.ts</code> (login, logout, session signature, and token verification)</li>
+        <li><strong>API Routes:</strong> <code>/api/contact</code>, <code>/api/admin/login</code>, <code>/api/admin/logout</code>, <code>/api/admin/submissions</code></li>
+    </ul>
+
+    <h2>5. Conclusions & Recommendations</h2>
+    <p>The web application has met all functional criteria successfully. All security parameters (like route protection and parameter validation) functioned correctly during the automated tests.</p>
+    <p>It is highly recommended to integrate this test suite (<code>run_tests.ts</code>) in your CI/CD pipelines to ensure ongoing stability during future feature additions.</p>
+
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+</body>
+</html>
